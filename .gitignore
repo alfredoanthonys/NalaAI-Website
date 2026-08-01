@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# working assets — originals kept locally; the site loads its copies from public/
+/profilepicturestesti/
+/backgroundwa.png
+/logo.png
+/logotext.png
+/profilewa.jpg
