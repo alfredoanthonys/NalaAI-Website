@@ -53,7 +53,7 @@ export function Nav() {
             // and the hero gradient ghost through and the links stop being
             // cleanly legible.
             ? "mt-3 h-16 max-w-[880px] rounded-lg border-line bg-white px-4 shadow-card sm:px-5"
-            : "mt-0 h-[88px] max-w-[1200px] rounded-lg border-transparent bg-transparent px-0 shadow-none",
+            : "mt-0 h-[88px] max-w-frame rounded-lg border-transparent bg-transparent px-0 shadow-none",
         )}
       >
         <a
@@ -117,7 +117,7 @@ export function Nav() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="absolute inset-x-4 mx-auto mt-2 max-w-[1200px] rounded-lg border border-line bg-white p-3 shadow-card sm:inset-x-6 lg:hidden"
+        className="absolute inset-x-4 mx-auto mt-2 max-w-frame rounded-lg border border-line bg-white p-3 shadow-card sm:inset-x-6 lg:hidden"
       >
         <nav aria-label="Menu utama (mobile)" className="flex flex-col gap-1">
           {nav.links.map((link) => (

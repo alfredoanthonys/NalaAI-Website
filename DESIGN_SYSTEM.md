@@ -75,7 +75,7 @@ Mobile: scale hero down to 32px, h1 to 28px; everything else holds.
 | `--shadow-card` | `0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.06)` — soft, low-contrast; never a hard drop shadow |
 | `--border-card` | 1px solid `--color-border`, always paired with the shadow above (not either/or) |
 
-Grid: 12-column, max content width 1200px, 24px gutters. Feature blocks run in a 2-column grid on desktop, 1-column stacked on mobile.
+Grid: 12-column, max content width 1600px (`--container-frame`, exposed as `max-w-frame`), 24px gutters. The hero panel is exempt: it runs near full-bleed with only the page gutter. Feature blocks run in a 2-column grid on desktop, 1-column stacked on mobile.
 
 ---
 

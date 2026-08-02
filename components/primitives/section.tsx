@@ -1,8 +1,11 @@
 import { cn } from "@/lib/utils";
 
 /**
- * DESIGN_SYSTEM §4 — 12-column grid, max content width 1200px, 24px gutters,
- * 96–120px vertical padding per full section on desktop, 56px on mobile.
+ * DESIGN_SYSTEM §4 — 12-column grid, 24px gutters, 96–120px vertical padding
+ * per full section on desktop, 56px on mobile.
+ *
+ * Max content width comes from `--container-frame` (globals.css) rather than a
+ * literal here, so the rails and the nav cannot drift out of alignment with it.
  */
 export function Container({
   children,
@@ -11,7 +14,7 @@ export function Container({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={cn("mx-auto w-full max-w-[1200px] px-6", className)}>{children}</div>;
+  return <div className={cn("mx-auto w-full max-w-frame px-6", className)}>{children}</div>;
 }
 
 /**
@@ -40,7 +43,7 @@ export function Section({
 
 /**
  * The hairline that closes every section's heading band. Negative margins pull
- * it back out through the container's 24px gutter so it spans the full 1200px
+ * it back out through the container's 24px gutter so it spans the full frame
  * and meets the page's grid rails exactly — a rule stopping short of them would
  * read as a stray underline rather than as part of the same grid.
  *

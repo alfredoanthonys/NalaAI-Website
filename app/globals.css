@@ -66,6 +66,18 @@
   --color-success: #16a34a;
   --color-danger: #dc2626;
 
+  /*
+   * The page frame. Every section container, the grid rails and the nav bar all
+   * measure off this one value, so widening the page is a single-line change and
+   * nothing drifts out of alignment. Exposed to Tailwind as `max-w-frame`.
+   *
+   * 1600 rather than §4's original 1200: on a 1920 display 1200 left 360px of
+   * white on each side while the hero panel ran nearly edge to edge, and the
+   * mismatch read as a mistake. Headings and body copy still cap themselves
+   * (max-w-2xl / max-w-xl), so this widens grids and cards, not line lengths.
+   */
+  --container-frame: 1600px;
+
   --text-hero: 56px;
   --text-hero--line-height: 1.05;
   --text-hero--letter-spacing: -0.015em;
@@ -411,6 +423,25 @@
      comet parked on the grid. */
   .hero-spark {
     display: none;
+  }
+}
+
+/*
+ * From lg up the frame stops being a flat 1600px and becomes "1600px, but never
+ * more than 92% of the viewport".
+ *
+ * A flat cap only leaves margin on displays wider than itself, so on a 1440
+ * laptop the container filled the window edge to edge and the grid rails — which
+ * are drawn on the container's outer edge — had nowhere to sit and disappeared.
+ * Holding 4% back on each side keeps them visible at every desktop size while
+ * 1920 still gets the full 1600px.
+ *
+ * Below lg this does not apply: phones and tablets want the full width, and the
+ * rails are hidden there anyway.
+ */
+@media (min-width: 64rem) {
+  :root {
+    --container-frame: min(1600px, 92vw);
   }
 }
 
