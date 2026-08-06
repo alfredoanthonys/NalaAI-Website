@@ -209,15 +209,26 @@ const CHATS = [
   },
   { name: "+62 812-8899-1204", preview: "makasih kak 🙏", time: "Kemarin", tint: "#6D8B74" },
   { name: "Sinta Maharani", preview: "paketnya udah sampe!", time: "Kemarin", tint: "#C77DFF" },
+  // The last three only appear once the panel grows past its mobile height —
+  // without them the sidebar ran out of chats and left a blank column foot.
+  { name: "Agung Prasetyo", preview: "bisa kirim hari ini ga?", time: "Kemarin", tint: "#4A6FA5" },
+  { name: "Melati Cahyani", preview: "yang travel size ready?", time: "Senin", tint: "#B08968" },
+  { name: "Grup Reseller Bandung", preview: "~Rina: noted kak", time: "Senin", tint: "#7A9E7E" },
 ];
 
 export function WhatsappDesktopMockup({ className }: { className?: string }) {
   return (
     <div
-      className={cn("relative overflow-hidden rounded-lg border border-line shadow-panel", className)}
+      className={cn(
+        // flex column so the panel fills whatever height its container gives it;
+        // the caller sets that, which is what keeps this and the dashboard card
+        // the same size where they sit on the same page.
+        "relative flex h-[430px] flex-col overflow-hidden rounded-lg border border-line shadow-panel sm:h-[490px] lg:h-[560px]",
+        className,
+      )}
       style={{ backgroundColor: D.thread }}
       role="img"
-      aria-label="WhatsApp Desktop pada akun bisnis skincare. Satu chat pelanggan sedang terbuka: pelanggan menanyakan apakah serumnya aman untuk kulit sensitif, Nala AI menjawab dari daftar produk, lalu saat pelanggan menanyakan refund chat-nya dioper ke anggota tim di chat yang sama."
+      aria-label="WhatsApp Desktop pada akun bisnis skincare. Satu chat pelanggan sedang terbuka: pelanggan menanyakan harga Calming Serum 30ml lalu apakah serumnya aman untuk kulit sensitif, Nala AI menjawab keduanya dari katalog dan daftar produk, lalu saat pelanggan menanyakan refund chat-nya dioper ke anggota tim di chat yang sama."
     >
       {/*
        * The window buttons get their own strip rather than floating over the
@@ -225,7 +236,7 @@ export function WhatsappDesktopMockup({ className }: { className?: string }) {
        * always landed across the rail/sidebar seam and read as a rendering bug.
        */}
       <div
-        className="flex h-7 items-center gap-1.5 border-b px-3"
+        className="flex h-7 shrink-0 items-center gap-1.5 border-b px-3"
         style={{ backgroundColor: D.rail, borderColor: D.line }}
       >
         {["#FF5F57", "#FEBC2E", "#28C840"].map((colour) => (
@@ -233,7 +244,7 @@ export function WhatsappDesktopMockup({ className }: { className?: string }) {
         ))}
       </div>
 
-      <div className="flex h-[400px]">
+      <div className="flex min-h-0 flex-1">
         {/* Icon rail */}
         <div
           className="flex w-9 shrink-0 flex-col items-center gap-4 border-r pt-4 pb-3"
@@ -373,6 +384,38 @@ export function WhatsappDesktopMockup({ className }: { className?: string }) {
             />
 
             <div className="relative flex h-full flex-col justify-end space-y-1.5 px-3 py-3">
+              {/* Scrollback. The thread is bottom-anchored, so without earlier
+                  turns the taller panel opened a blank field above the first
+                  message. These also do useful work: they show Nala answering a
+                  plain price question before the harder one arrives. */}
+              <div className="flex justify-center py-0.5">
+                <span
+                  className="rounded-sm px-2 py-1 text-[8px] font-medium"
+                  style={{ backgroundColor: "rgba(0,0,0,0.06)", color: D.muted }}
+                >
+                  Hari ini
+                </span>
+              </div>
+
+              <DesktopIn time="09.10">halo kak, mau tanya dong</DesktopIn>
+
+              <DesktopOut time="09.10" byline="Nala AI">
+                halo kak! boleh, mau tanya yang mana? 😊
+              </DesktopOut>
+
+              <DesktopIn time="09.11">calming serum yang 30ml berapa ya?</DesktopIn>
+
+              <DesktopOut time="09.11" byline="Nala AI">
+                Calming Serum 30ml Rp 189.000 kak, stok lagi ready
+                <span
+                  className="mt-1.5 flex w-fit items-center gap-1.5 rounded-sm px-1.5 py-1 text-[8.5px] font-medium"
+                  style={{ backgroundColor: "rgba(0,0,0,0.05)", color: D.text }}
+                >
+                  <Package className="size-2.5" strokeWidth={2} />
+                  Calming Serum · katalog
+                </span>
+              </DesktopOut>
+
               <DesktopIn time="09.12">kak serum ini aman ga buat kulit sensitif?</DesktopIn>
 
               <DesktopOut time="09.12" byline="Nala AI">

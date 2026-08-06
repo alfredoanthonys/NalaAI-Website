@@ -5,7 +5,6 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 import { DashboardMockup } from "@/components/mockups/dashboard-mockup";
 import { WhatsappMockup } from "@/components/mockups/whatsapp-mockup";
-import { HeroGrid } from "@/components/site/hero-grid";
 import { WhatsappIcon } from "@/components/site/whatsapp-icon";
 import { Container } from "@/components/primitives/section";
 import { Button } from "@/components/ui/button";
@@ -41,8 +40,6 @@ export function Hero() {
     // Flush, the hairline would run into the card's bottom corners.
     <section id="top" className="px-4 pt-3 pb-4 sm:px-6 sm:pb-6">
       <div className="hero-gradient relative overflow-hidden rounded-lg">
-        <HeroGrid />
-
         <motion.div
           className="relative"
           variants={container}
@@ -57,21 +54,11 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/*
-             * Two things set the chip apart from the line above: the headline's
-             * leading, which moves the whole chip down, and the chip's own top
-             * padding, which grows its background *upward*. Padding is kept
-             * modest and the leading does the work, so the blue block never
-             * creeps toward the line above it.
-             */}
             <motion.h1
               variants={item}
               className="mt-6 font-display text-hero leading-[1.6] font-semibold text-balance text-white"
             >
-              {hero.headline.before}{" "}
-              <span className="ml-1 inline-block rounded-sm bg-brand-300 px-4 pt-2 pb-2.5 leading-none text-brand-900">
-                {hero.headline.highlight}
-              </span>
+              {hero.headline.before} {hero.headline.highlight}
               {hero.headline.after}
             </motion.h1>
 

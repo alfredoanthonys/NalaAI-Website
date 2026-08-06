@@ -2,69 +2,69 @@ import { WhatsappDesktopMockup } from "@/components/mockups/whatsapp-mockup";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { Section } from "@/components/primitives/section";
 import { about } from "@/content/home";
+import { cn } from "@/lib/utils";
 
 /**
- * Heading held on the left while the argument runs down the right. The heading
- * stays in the reader's eye for the whole column, which suits a section that is
- * one continuous claim rather than a set of parallel items.
+ * Stacked rather than columned: a left-aligned heading and one-line claim, the
+ * product at full width beneath it, then the argument broken into short ruled
+ * columns along the bottom.
  *
- * No SectionRule here: the rule exists to close a centred heading *band*, and
- * there is no band when the heading sits beside its content. Same reason the FAQ
- * goes without one.
+ * The mockup earns the full width — it is a WhatsApp thread, and at half width
+ * the message text was too small to actually read, which made it decoration
+ * rather than evidence. The columns underneath are captions to it, so they are
+ * kept to a line or two each; anything longer and the reader stops scanning and
+ * starts reading, which is not what a row of three is for.
+ *
+ * No SectionRule here: the rule exists to close a *centred* heading band, and
+ * this heading is left-aligned and runs straight into the product. Same reason
+ * the FAQ goes without one.
  */
 export function AboutSection() {
   return (
     <Section id="about" className="bg-surface-50">
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-        <Reveal>
-          <div>
-            <h2 className="font-display text-h1 font-semibold text-balance text-ink-900">
-              {about.heading}
-            </h2>
-            <p className="mt-4 text-body text-ink-600">{about.subheading}</p>
-
-            {/*
-             * The empty half-column under the heading was the argument for
-             * putting the product here: this section claims Nala answers in the
-             * buyer's own language and hands over cleanly, and the thread shows
-             * both in about two seconds of looking. The skincare variant is used
-             * rather than the hero's so the page never repeats a conversation.
-             */}
-            <div className="relative mt-8">
-              <div className="panel-glow" aria-hidden="true" />
-              <WhatsappDesktopMockup className="relative w-full" />
-            </div>
-
-            <p className="mt-4 text-small text-ink-400">{about.demoCaption}</p>
-          </div>
-        </Reveal>
-
-        <div>
-          <Reveal delay={0.06}>
-            {/* The one paragraph on the site written about us rather than about
-                the reader — set at h3 so it reads as a statement, not as body. */}
-            <p className="font-display text-h3 leading-relaxed font-medium text-ink-900">
-              {about.lead}
-            </p>
-          </Reveal>
-
-          {/* Ruled rows rather than cards: the hairlines match the page's grid
-              language, and three stacked cards here would restate the layout of
-              the comparison section directly below. */}
-          <RevealGroup
-            className="mt-10 border-t border-line"
-            as="ul"
-            stagger={0.08}
-          >
-            {about.principles.map((principle) => (
-              <RevealItem as="li" key={principle.title} className="border-b border-line py-6">
-                <h3 className="text-body font-semibold text-ink-900">{principle.title}</h3>
-                <p className="mt-2 text-body text-ink-600">{principle.body}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+      <Reveal>
+        <div className="max-w-3xl">
+          <h2 className="font-display text-h1 font-semibold text-balance text-ink-900">
+            {about.heading}
+          </h2>
+          <p className="mt-4 text-body text-ink-600">{about.subheading}</p>
         </div>
-      </div>
+      </Reveal>
+
+      {/* Capped and centred rather than run to the frame's full 1600px. The
+          mockup is drawn at ~11px type; stretched past ~1000px it letterboxes
+          into a strip too wide to read, which is the opposite of the point.
+          The height is stated here, and the dashboard section states the same
+          one, so the two product shots are identical boxes down the page. */}
+      <Reveal delay={0.06}>
+        <div className="relative mx-auto mt-10 h-[430px] w-full max-w-5xl sm:h-[490px] lg:h-[560px]">
+          <div className="panel-glow" aria-hidden="true" />
+          <WhatsappDesktopMockup className="relative h-full w-full" />
+        </div>
+      </Reveal>
+
+      {/* Hairline above the row and between the columns, matching the page's
+          grid language. The dividers are lg-only: stacked, a left border on a
+          full-width block reads as a quote bar rather than as a column edge. */}
+      <RevealGroup
+        className="mt-12 grid gap-8 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-0"
+        as="ul"
+        stagger={0.08}
+      >
+        {about.principles.map((principle, index) => (
+          <RevealItem
+            as="li"
+            key={principle.title}
+            className={cn(
+              "lg:px-8",
+              index === 0 ? "lg:pl-0" : "lg:border-l lg:border-line",
+            )}
+          >
+            <h3 className="text-body font-semibold text-ink-900">{principle.title}</h3>
+            <p className="mt-2 text-body text-ink-600">{principle.body}</p>
+          </RevealItem>
+        ))}
+      </RevealGroup>
     </Section>
   );
 }

@@ -46,20 +46,25 @@ const QUEUE = [
   { name: "Kalau ada reaksi bisa refund?", channel: "Dewi", status: "Dialihkan" },
   { name: "Calming serum restock kapan?", channel: "Nala", status: "Dijawab" },
   { name: "Bisa COD ga kak?", channel: "Nala", status: "Dijawab" },
+  { name: "Serum buat kulit berminyak yang mana?", channel: "Nala", status: "Dijawab" },
+  { name: "Mau ambil 20 pcs, ada harga grosir?", channel: "Rio", status: "Dialihkan" },
 ];
 
 export function DashboardMockup({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "@container overflow-hidden rounded-lg border border-line bg-white shadow-panel",
+        // No height of its own: the hero sizes it by content, the dashboard
+        // section hands it an explicit one to match the thread beside it. The
+        // flex column is what lets it fill that height when it is given.
+        "@container flex flex-col overflow-hidden rounded-lg border border-line bg-white shadow-panel",
         className,
       )}
       role="img"
       aria-label="Dashboard Nala AI: 2.184 chat ditangani bulan ini, 87% terjawab otomatis, rata-rata balasan 1,2 detik dan 342 orderan, beserta antrean chat WhatsApp yang sedang masuk."
     >
       {/* Top bar */}
-      <div className="flex h-12 items-center gap-3 border-b border-line px-3 @md:px-4">
+      <div className="flex h-12 shrink-0 items-center gap-3 border-b border-line px-3 @md:px-4">
         {/* The artwork, not the word set in our display face: the logo is a
             lowercase geometric lockup and "Nala" typed in Poppins semibold was
             visibly not the same thing sitting two inches from the real one. */}
@@ -81,7 +86,7 @@ export function DashboardMockup({ className }: { className?: string }) {
         </div>
       </div>
 
-      <div className="flex">
+      <div className="flex min-h-0 flex-1">
         {/* Icon-nav rail — one item highlighted in light blue as active. */}
         <nav className="hidden w-[148px] shrink-0 flex-col gap-0.5 border-r border-line p-2.5 @lg:flex">
           {RAIL.map(({ icon: Icon, label, active }) => (
@@ -104,8 +109,8 @@ export function DashboardMockup({ className }: { className?: string }) {
         </nav>
 
         {/* Main area */}
-        <div className="min-w-0 flex-1 bg-surface-50/60 p-3 @md:p-4">
-          <div className="grid grid-cols-2 gap-2.5 @3xl:grid-cols-4">
+        <div className="flex min-w-0 flex-1 flex-col bg-surface-50/60 p-3 @md:p-4">
+          <div className="grid shrink-0 grid-cols-2 gap-2.5 @3xl:grid-cols-4">
             <StatTile label="Chat" value="2.184" delta="18%">
               <BarChart values={[38, 44, 41, 56, 52, 63, 71]} />
             </StatTile>
@@ -120,9 +125,9 @@ export function DashboardMockup({ className }: { className?: string }) {
             </StatTile>
           </div>
 
-          <div className="mt-2.5 grid gap-2.5 @3xl:grid-cols-5">
+          <div className="mt-2.5 grid min-h-0 flex-1 gap-2.5 @3xl:grid-cols-5">
             {/* Volume chart card */}
-            <div className="rounded-md border border-line bg-white p-3.5 @3xl:col-span-2">
+            <div className="flex min-h-0 flex-col rounded-md border border-line bg-white p-3.5 @3xl:col-span-2">
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-[11px] font-medium text-ink-400">Volume chat</p>
@@ -134,11 +139,14 @@ export function DashboardMockup({ className }: { className?: string }) {
                   30 hari
                 </span>
               </div>
+              {/* Takes the card's spare height rather than a fixed 56px: given
+                  a tall card, a short trend line leaves a blank field under it
+                  and reads as a rule rather than as data. */}
               <LineChart
                 values={[18, 24, 21, 33, 29, 41, 38, 52, 47, 61, 58, 72]}
-                className="mt-4 h-14"
+                className="mt-4 min-h-14 flex-1"
               />
-              <div className="mt-2 flex justify-between text-[9px] text-ink-400 tabular">
+              <div className="mt-2 flex shrink-0 justify-between text-[9px] text-ink-400 tabular">
                 <span>Minggu 1</span>
                 <span>Minggu 2</span>
                 <span>Minggu 3</span>
@@ -147,7 +155,7 @@ export function DashboardMockup({ className }: { className?: string }) {
             </div>
 
             {/* Live queue card */}
-            <div className="rounded-md border border-line bg-white p-3.5 @3xl:col-span-3">
+            <div className="flex min-h-0 flex-col overflow-hidden rounded-md border border-line bg-white p-3.5 @3xl:col-span-3">
               <div className="flex items-center justify-between">
                 <p className="text-[11px] font-medium text-ink-400">Chat terbaru</p>
                 <span className="inline-flex items-center gap-1 text-[10px] font-medium text-success">

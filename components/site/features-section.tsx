@@ -59,9 +59,13 @@ export function FeaturesSection() {
                   className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px bg-line md:block"
                 />
 
+                {/* min-w-0 on both cells: a grid item's default min-width is
+                    auto, so one mockup a pixel wider than its track widened the
+                    whole row past the viewport and put a hairline of horizontal
+                    scroll on 375px phones. */}
                 <div
                   className={cn(
-                    "flex flex-col justify-center px-6 py-12 lg:px-12 lg:py-16",
+                    "flex min-w-0 flex-col justify-center px-6 py-12 lg:px-12 lg:py-16",
                     reversed && "md:order-2",
                   )}
                 >
@@ -80,7 +84,7 @@ export function FeaturesSection() {
 
                 <div
                   className={cn(
-                    "relative flex items-center justify-center bg-surface-50/60 px-6 py-12 lg:px-12",
+                    "relative flex min-w-0 items-center justify-center bg-surface-50/60 px-6 py-12 lg:px-12",
                     reversed && "md:order-1",
                   )}
                 >

@@ -2,7 +2,6 @@ import { Check } from "lucide-react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Container } from "@/components/primitives/section";
-import { HeroGrid } from "@/components/site/hero-grid";
 import { WhatsappIcon } from "@/components/site/whatsapp-icon";
 import { Button } from "@/components/ui/button";
 import { closingCta } from "@/content/home";
@@ -21,11 +20,6 @@ export function CtaBand() {
     <section id="consultation" className="scroll-mt-24 px-4 pt-16 sm:px-6 md:pt-20">
       <Container className="px-0">
         <div className="hero-gradient overflow-hidden rounded-t-lg">
-          {/* The hero's travelling sparks, on offsets that fit a panel a third
-              its height and masked to the right so nothing ever streaks behind
-              the headline. */}
-          <HeroGrid variant="panel" />
-
           <Reveal>
             <div className="relative px-6 py-12 sm:px-10 md:py-16 lg:px-14">
               <h2 className="max-w-2xl font-display text-h1 font-semibold text-balance text-white">

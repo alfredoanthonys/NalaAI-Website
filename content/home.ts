@@ -57,53 +57,53 @@ export const hero = {
  */
 export const about = {
   heading: "Dibuat di Indonesia, Khusus untuk Bisnis yang Jualan di WhatsApp",
-  subheading: "Kami cuma bikin satu hal: AI yang balas chat WhatsApp bisnis Anda.",
-  demoCaption:
-    "Satu chat utuh, dari pertanyaan pertama sampai pembeli siap pesan. Dijawab dalam bahasa yang dipakai pembeli, lalu dioper ke tim kalau memang perlu orang.",
-  lead: "Hampir semua bisnis di Indonesia jualan lewat WhatsApp, tapi hampir tidak ada yang sanggup jaga chat 24 jam. Chat masuk jam 11 malam, baru dibalas besok siang, pembelinya sudah beli di tempat lain. Nala AI yang balas chat itu, langsung, tanpa perlu ada orang yang bangun.",
+  subheading:
+    "Chat masuk jam 11 malam, dibalas besok siang, pembelinya sudah beli di tempat lain. Nala AI yang balas duluan, langsung.",
   principles: [
     {
-      title: "Paham Cara Pelanggan Indonesia Chat",
-      body: "Pembeli di sini menulis singkat, sering typo, dan campur bahasa. “ready ga kak?”, “brp harganya?”, “bisa COD?”. Nala tetap menangkap maksudnya dan menjawab dengan jelas, bukan membalas “maaf, saya kurang mengerti”.",
+      title: "Paham Cara Pelanggan Chat",
+      body: "“ready ga kak?”, “brp harganya?”, “bisa COD?” — Nala tetap paham maksudnya.",
     },
     {
-      title: "Jawabannya dari Informasi Anda Sendiri",
-      body: "Nala cuma menjawab dari informasi yang Anda kirim: harga, produk atau layanan, dan aturan bisnis Anda. Nala tidak pernah menyebut diskon yang tidak pernah Anda buat. Kalau ada yang tidak diketahui, Nala bilang apa adanya lalu oper chat-nya ke tim.",
+      title: "Jawab dari Info Anda Sendiri",
+      body: "Cuma menjawab dari yang Anda kirim. Tidak pernah mengarang diskon.",
     },
     {
-      title: "Tim Anda Tetap Pegang Kendali",
-      body: "Chat mana pun bisa diambil alih tim Anda sekali tap. Topik yang Anda tandai, misalnya komplain dan refund, selalu langsung ke orang. Nomor WhatsApp tetap milik Anda, Nala cuma yang balas duluan.",
+      title: "Tim Anda Pegang Kendali",
+      body: "Ambil alih chat sekali tap. Komplain dan refund selalu ke orang.",
     },
   ],
 } as const;
 
 /**
- * The dashboard section, mirrored against the about section: heading and product
- * on the right, argument on the left. Nala runs inside WhatsApp, so the obvious
- * question a buyer has is where they actually see any of it — this answers that
- * before the features section starts making claims about reports.
+ * The dashboard section. Nala runs inside WhatsApp, so the obvious question a
+ * buyer has is where they actually see any of it — this answers that before the
+ * features section starts making claims about reports.
+ *
+ * Point bodies are captions to the mockup above them, not paragraphs: one line
+ * each, because they sit in a four-column row where a third line on one column
+ * ragged against the others is the first thing the eye lands on.
  */
 export const dashboard = {
   heading: "Pantau Semua Chat dan Hasilnya dalam Satu Dashboard",
   subheading:
-    "Nala menjawab di dalam WhatsApp. Dashboard-nya tempat Anda melihat apa yang sudah dijawab, apa yang belum bisa dijawab, dan chat mana yang berakhir jadi orderan.",
-  lead: "Kebanyakan bisnis menjalankan WhatsApp dari HP satu orang. Begitu orang itu cuti atau resign, riwayat chat dan semua janji ke pelanggan ikut hilang bersama HP-nya. Di dashboard, semuanya tersimpan di satu tempat yang bisa dibuka siapa pun di tim Anda.",
+    "Nala menjawab di dalam WhatsApp. Dashboard-nya tempat Anda melihat hasilnya, tanpa bergantung pada HP satu orang.",
   points: [
     {
-      title: "Semua Nomor WhatsApp dalam Satu Layar",
-      body: "Kalau bisnis Anda punya beberapa nomor, misalnya per cabang atau per brand, semuanya masuk ke dashboard yang sama. Tim tidak perlu gonta-ganti HP, dan Anda bisa langsung lihat cabang mana yang chat-nya paling ramai.",
+      title: "Semua Nomor, Satu Layar",
+      body: "Per cabang atau per brand, semuanya masuk ke dashboard yang sama.",
     },
     {
       title: "Ambil Alih Kapan Saja",
-      body: "Di daftar chat kelihatan mana yang sedang dipegang Nala dan mana yang menunggu orang. Tim Anda tinggal masuk dari dashboard dan lanjut mengetik di chat yang sama, jadi pembeli tidak merasa ada pergantian.",
+      body: "Tim Anda lanjut mengetik di chat yang sama, tanpa terasa ada pergantian.",
     },
     {
-      title: "Ubah Harga atau Info Sekali Saja",
-      body: "Ganti harga, tandai yang sedang kosong, tambah layanan baru. Begitu disimpan, chat berikutnya langsung memakai informasi yang baru, tanpa perlu memberi tahu Nala dua kali.",
+      title: "Ubah Info Sekali Saja",
+      body: "Ganti harga atau tandai stok kosong. Chat berikutnya langsung ikut.",
     },
     {
       title: "Tahu Kenapa Pembeli Batal",
-      body: "Laporannya menunjukkan pertanyaan yang paling sering masuk, pertanyaan yang belum bisa dijawab Nala, dan chat mana yang berakhir jadi orderan. Biasanya penyebabnya cuma satu informasi yang belum ada, dan itu bisa Anda tambahkan hari itu juga.",
+      body: "Pertanyaan tersering, yang belum terjawab, dan chat yang jadi orderan.",
     },
   ],
 } as const;
