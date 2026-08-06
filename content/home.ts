@@ -153,7 +153,7 @@ export const comparison = {
  * and the chip lists the concrete capability names a buyer will scan for.
  */
 export const features = {
-  heading: "Semua yang Tidak Perlu Lagi Diketik Tim Anda",
+  heading: "Gausah Lagi Pusing Balas Chat Satu-Satu, Nala yang Bantu",
   subheading:
     "Biarkan AI yang balas ribuan chat berulang, tim Anda tinggal fokus ke closing.",
   items: [
