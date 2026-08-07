@@ -20,7 +20,7 @@ export function StatTile({
   return (
     <div
       className={cn(
-        "flex flex-col justify-between rounded-md border border-line bg-white p-3",
+        "flex flex-col justify-between rounded-md border border-line bg-white p-3 @4xl:p-4",
         className,
       )}
     >
@@ -31,15 +31,17 @@ export function StatTile({
        * wider than a tile ever is.
        */}
       <div className="flex items-start justify-between gap-1.5">
-        <span className="min-w-0 text-[11px] leading-tight font-medium text-ink-400">{label}</span>
+        <span className="min-w-0 text-[11px] leading-tight font-medium text-ink-400 @4xl:text-[13px]">
+          {label}
+        </span>
         {delta ? (
-          <span className="shrink-0 rounded-sm bg-success/10 px-1 py-0.5 text-[10px] font-semibold text-success tabular">
+          <span className="shrink-0 rounded-sm bg-success/10 px-1 py-0.5 text-[10px] font-semibold text-success tabular @4xl:px-1.5 @4xl:text-[11.5px]">
             +{delta}
           </span>
         ) : null}
       </div>
 
-      <span className="mt-2 block font-display text-xl leading-none font-semibold text-ink-900 tabular">
+      <span className="mt-2 block font-display text-xl leading-none font-semibold text-ink-900 tabular @4xl:mt-3 @4xl:text-3xl">
         {value}
       </span>
 

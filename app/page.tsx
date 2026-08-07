@@ -32,8 +32,8 @@ export default function Home() {
         <GridRails edges="both">
           <ComparisonSection />
           <AboutSection />
-          <DashboardSection />
           <FeaturesSection />
+          <DashboardSection />
           <Testimonials />
           <PricingPreview />
           <Faq />

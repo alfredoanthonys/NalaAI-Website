@@ -22,9 +22,15 @@ import { cn } from "@/lib/utils";
  * realistic operating data, never lorem ipsum.
  *
  * Laid out with container queries, not viewport ones. It renders at ~800px in
- * the hero and ~570px in the dashboard section, and `lg:` asks about the window
- * — so on a desktop screen the narrow copy was still laying four stat tiles
- * across 90px each and pushing the trend badges out through the card edge.
+ * the hero and full-frame width in the dashboard section, and `lg:` asks about
+ * the window — so on a desktop screen the narrow copy was still laying four stat
+ * tiles across 90px each and pushing the trend badges out through the card edge.
+ *
+ * The `@4xl` tier (896px container) is the full-bleed copy in the dashboard
+ * section. Drawn at the hero's type sizes across 1400px it read as a screenshot
+ * viewed at 60% zoom rather than as an interface; that tier steps the whole
+ * thing up to sizes a real dashboard uses. The hero is capped at 800px, so it
+ * never crosses the threshold and is untouched by any of it.
  */
 
 const RAIL = [
@@ -64,22 +70,22 @@ export function DashboardMockup({ className }: { className?: string }) {
       aria-label="Dashboard Nala AI: 2.184 chat ditangani bulan ini, 87% terjawab otomatis, rata-rata balasan 1,2 detik dan 342 orderan, beserta antrean chat WhatsApp yang sedang masuk."
     >
       {/* Top bar */}
-      <div className="flex h-12 shrink-0 items-center gap-3 border-b border-line px-3 @md:px-4">
+      <div className="flex h-12 shrink-0 items-center gap-3 border-b border-line px-3 @md:px-4 @4xl:h-15 @4xl:px-6">
         {/* The artwork, not the word set in our display face: the logo is a
             lowercase geometric lockup and "Nala" typed in Poppins semibold was
             visibly not the same thing sitting two inches from the real one. */}
-        <NalaLogo markClassName="size-5" wordmarkClassName="h-3.5" />
+        <NalaLogo markClassName="size-5 @4xl:size-6" wordmarkClassName="h-3.5 @4xl:h-4" />
 
-        <div className="ml-2 hidden h-7 max-w-[220px] flex-1 items-center gap-2 rounded-sm border border-line bg-surface-50 px-2.5 @md:flex">
-          <Search className="size-3.5 text-ink-400" strokeWidth={1.75} />
-          <span className="text-[11px] text-ink-400">Cari chat</span>
+        <div className="ml-2 hidden h-7 max-w-[220px] flex-1 items-center gap-2 rounded-sm border border-line bg-surface-50 px-2.5 @md:flex @4xl:h-9 @4xl:max-w-[300px] @4xl:px-3">
+          <Search className="size-3.5 text-ink-400 @4xl:size-4" strokeWidth={1.75} />
+          <span className="text-[11px] text-ink-400 @4xl:text-[13px]">Cari chat</span>
         </div>
 
-        <div className="ml-auto flex items-center gap-2.5">
-          <Bell className="size-4 text-ink-400" strokeWidth={1.75} />
-          <div className="flex items-center gap-1.5 rounded-sm border border-line py-1 pr-2 pl-1">
-            <CircleUserRound className="size-4 text-ink-400" strokeWidth={1.75} />
-            <span className="hidden text-[11px] font-medium text-ink-600 @md:inline">
+        <div className="ml-auto flex items-center gap-2.5 @4xl:gap-4">
+          <Bell className="size-4 text-ink-400 @4xl:size-5" strokeWidth={1.75} />
+          <div className="flex items-center gap-1.5 rounded-sm border border-line py-1 pr-2 pl-1 @4xl:py-1.5 @4xl:pr-3 @4xl:pl-1.5">
+            <CircleUserRound className="size-4 text-ink-400 @4xl:size-5" strokeWidth={1.75} />
+            <span className="hidden text-[11px] font-medium text-ink-600 @md:inline @4xl:text-[13px]">
               Ayuwangi
             </span>
           </div>
@@ -88,29 +94,29 @@ export function DashboardMockup({ className }: { className?: string }) {
 
       <div className="flex min-h-0 flex-1">
         {/* Icon-nav rail — one item highlighted in light blue as active. */}
-        <nav className="hidden w-[148px] shrink-0 flex-col gap-0.5 border-r border-line p-2.5 @lg:flex">
+        <nav className="hidden w-[148px] shrink-0 flex-col gap-0.5 border-r border-line p-2.5 @lg:flex @4xl:w-[200px] @4xl:gap-1 @4xl:p-4">
           {RAIL.map(({ icon: Icon, label, active }) => (
             <span
               key={label}
               className={cn(
-                "flex items-center gap-2 rounded-sm px-2 py-1.5 text-[11px] font-medium",
+                "flex items-center gap-2 rounded-sm px-2 py-1.5 text-[11px] font-medium @4xl:gap-3 @4xl:px-3 @4xl:py-2.5 @4xl:text-[13px]",
                 active ? "bg-brand-300/14 text-brand-600" : "text-ink-400",
               )}
             >
-              <Icon className="size-3.5" strokeWidth={1.75} />
+              <Icon className="size-3.5 @4xl:size-4" strokeWidth={1.75} />
               {label}
             </span>
           ))}
 
-          <span className="mt-auto flex items-center gap-2 rounded-sm bg-surface-50 px-2 py-2 text-[10px] leading-tight font-medium text-ink-600">
-            <Sparkles className="size-3.5 shrink-0 text-brand-500" strokeWidth={1.75} />
+          <span className="mt-auto flex items-center gap-2 rounded-sm bg-surface-50 px-2 py-2 text-[10px] leading-tight font-medium text-ink-600 @4xl:px-3 @4xl:py-3 @4xl:text-[12px]">
+            <Sparkles className="size-3.5 shrink-0 text-brand-500 @4xl:size-4" strokeWidth={1.75} />
             Katalog diperbarui 4 menit lalu
           </span>
         </nav>
 
         {/* Main area */}
-        <div className="flex min-w-0 flex-1 flex-col bg-surface-50/60 p-3 @md:p-4">
-          <div className="grid shrink-0 grid-cols-2 gap-2.5 @3xl:grid-cols-4">
+        <div className="flex min-w-0 flex-1 flex-col bg-surface-50/60 p-3 @md:p-4 @4xl:gap-4 @4xl:p-6">
+          <div className="grid shrink-0 grid-cols-2 gap-2.5 @3xl:grid-cols-4 @4xl:gap-4">
             <StatTile label="Chat" value="2.184" delta="18%">
               <BarChart values={[38, 44, 41, 56, 52, 63, 71]} />
             </StatTile>
@@ -125,17 +131,19 @@ export function DashboardMockup({ className }: { className?: string }) {
             </StatTile>
           </div>
 
-          <div className="mt-2.5 grid min-h-0 flex-1 gap-2.5 @3xl:grid-cols-5">
+          <div className="mt-2.5 grid min-h-0 flex-1 gap-2.5 @3xl:grid-cols-5 @4xl:mt-0 @4xl:gap-4">
             {/* Volume chart card */}
-            <div className="flex min-h-0 flex-col rounded-md border border-line bg-white p-3.5 @3xl:col-span-2">
+            <div className="flex min-h-0 flex-col rounded-md border border-line bg-white p-3.5 @3xl:col-span-2 @4xl:p-5">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-[11px] font-medium text-ink-400">Volume chat</p>
-                  <p className="mt-1 font-display text-lg leading-none font-semibold text-ink-900 tabular">
+                  <p className="text-[11px] font-medium text-ink-400 @4xl:text-[13px]">
+                    Volume chat
+                  </p>
+                  <p className="mt-1 font-display text-lg leading-none font-semibold text-ink-900 tabular @4xl:mt-2 @4xl:text-2xl">
                     2.184
                   </p>
                 </div>
-                <span className="rounded-sm bg-surface-50 px-1.5 py-0.5 text-[10px] font-medium text-ink-600">
+                <span className="rounded-sm bg-surface-50 px-1.5 py-0.5 text-[10px] font-medium text-ink-600 @4xl:px-2 @4xl:py-1 @4xl:text-[12px]">
                   30 hari
                 </span>
               </div>
@@ -146,7 +154,7 @@ export function DashboardMockup({ className }: { className?: string }) {
                 values={[18, 24, 21, 33, 29, 41, 38, 52, 47, 61, 58, 72]}
                 className="mt-4 min-h-14 flex-1"
               />
-              <div className="mt-2 flex shrink-0 justify-between text-[9px] text-ink-400 tabular">
+              <div className="mt-2 flex shrink-0 justify-between text-[9px] text-ink-400 tabular @4xl:mt-3 @4xl:text-[11px]">
                 <span>Minggu 1</span>
                 <span>Minggu 2</span>
                 <span>Minggu 3</span>
@@ -155,27 +163,27 @@ export function DashboardMockup({ className }: { className?: string }) {
             </div>
 
             {/* Live queue card */}
-            <div className="flex min-h-0 flex-col overflow-hidden rounded-md border border-line bg-white p-3.5 @3xl:col-span-3">
+            <div className="flex min-h-0 flex-col overflow-hidden rounded-md border border-line bg-white p-3.5 @3xl:col-span-3 @4xl:p-5">
               <div className="flex items-center justify-between">
-                <p className="text-[11px] font-medium text-ink-400">Chat terbaru</p>
-                <span className="inline-flex items-center gap-1 text-[10px] font-medium text-success">
+                <p className="text-[11px] font-medium text-ink-400 @4xl:text-[13px]">Chat terbaru</p>
+                <span className="inline-flex items-center gap-1 text-[10px] font-medium text-success @4xl:gap-1.5 @4xl:text-[12px]">
                   <span className="size-1.5 rounded-full bg-success" />
                   Realtime
                 </span>
               </div>
 
-              <ul className="mt-2.5 divide-y divide-line">
+              <ul className="mt-2.5 divide-y divide-line @4xl:mt-3.5">
                 {QUEUE.map((item) => (
-                  <li key={item.name} className="flex items-center gap-2 py-1.5">
-                    <span className="min-w-0 flex-1 truncate text-[11px] text-ink-900">
+                  <li key={item.name} className="flex items-center gap-2 py-1.5 @4xl:gap-3 @4xl:py-2.5">
+                    <span className="min-w-0 flex-1 truncate text-[11px] text-ink-900 @4xl:text-[13.5px]">
                       {item.name}
                     </span>
-                    <span className="hidden text-[10px] text-ink-400 @md:inline">
+                    <span className="hidden text-[10px] text-ink-400 @md:inline @4xl:text-[12px]">
                       {item.channel}
                     </span>
                     <span
                       className={cn(
-                        "rounded-sm px-1.5 py-0.5 text-[10px] font-medium",
+                        "rounded-sm px-1.5 py-0.5 text-[10px] font-medium @4xl:px-2 @4xl:py-1 @4xl:text-[12px]",
                         item.status === "Dijawab"
                           ? "bg-success/10 text-success"
                           : "bg-brand-300/14 text-brand-600",

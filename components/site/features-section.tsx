@@ -34,7 +34,10 @@ const VISUALS = {
  */
 export function FeaturesSection() {
   return (
-    <Section id="features" className="bg-white" containerClassName="px-0">
+    // pb-0: the rows already close on a hairline, so the section's own bottom
+    // padding just opened a white band between that rule and the next section's
+    // opening rule. The grid now butts straight up against what follows.
+    <Section id="features" className="bg-white pb-0 md:pb-0" containerClassName="px-0">
       <Reveal>
         <SectionHeading className="px-6" heading={features.heading} subheading={features.subheading} />
       </Reveal>
@@ -48,10 +51,19 @@ export function FeaturesSection() {
           // Odd rows put the mockup on the left. Order is flipped at md only —
           // stacked, the copy always leads so the row still reads top-to-bottom.
           const reversed = index % 2 === 1;
+          // The last row goes without its own bottom rule: the next section
+          // draws one on its own top edge, and stacked the two read as a 2px
+          // line rather than as the grid's closing hairline.
+          const last = index === features.items.length - 1;
 
           return (
             <Reveal key={feature.title}>
-              <div className="relative grid border-b border-line md:grid-cols-2">
+              <div
+                className={cn(
+                  "relative grid md:grid-cols-2",
+                  !last && "border-b border-line",
+                )}
+              >
                 {/* Centre rule drawn rather than bordered on a cell: the cells
                     swap sides row to row, and a positioned line stays put. */}
                 <span
@@ -63,13 +75,16 @@ export function FeaturesSection() {
                     auto, so one mockup a pixel wider than its track widened the
                     whole row past the viewport and put a hairline of horizontal
                     scroll on 375px phones. */}
+                {/* Centred, not ragged-left against the cell edge: the mockup
+                    opposite is centred in its half, and a left-aligned column
+                    facing it left the row visibly lopsided. */}
                 <div
                   className={cn(
-                    "flex min-w-0 flex-col justify-center px-6 py-12 lg:px-12 lg:py-16",
+                    "flex min-w-0 flex-col items-center justify-center px-6 py-12 text-center lg:px-12 lg:py-16",
                     reversed && "md:order-2",
                   )}
                 >
-                  <h3 className="max-w-md font-display text-h2 font-semibold text-ink-900">
+                  <h3 className="max-w-md font-display text-h2 font-semibold text-balance text-ink-900">
                     {feature.title}
                   </h3>
                   <p className="mt-4 max-w-md text-body text-ink-600">{feature.body}</p>

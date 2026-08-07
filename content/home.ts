@@ -49,64 +49,31 @@ export const hero = {
 /**
  * The About section.
  *
- * Deliberately contains no company facts — no founding year, headcount, office
- * or customer count — because those are claims about reality and nobody has
- * given me the real ones. What is here instead is positioning and commitments,
- * all of which the rest of the site already asserts. If you want the harder
- * credentials in this section, supply them and they can be added.
+ * No heading or standfirst: the section opens on the WhatsApp mockup itself and
+ * these three lines are the caption under it. They deliberately contain no
+ * company facts — no founding year, headcount, office or customer count —
+ * because those are claims about reality and nobody has given me the real ones.
+ * What is here instead is positioning and commitments, all of which the rest of
+ * the site already asserts. If you want the harder credentials in this section,
+ * supply them and they can be added.
  */
 export const about = {
-  heading: "Dibuat di Indonesia, Khusus untuk Bisnis yang Jualan di WhatsApp",
-  subheading:
-    "Chat masuk jam 11 malam, dibalas besok siang, pembelinya sudah beli di tempat lain. Nala AI yang balas duluan, langsung.",
   principles: [
     {
       title: "Paham Cara Pelanggan Chat",
-      body: "“ready ga kak?”, “brp harganya?”, “bisa COD?” — Nala tetap paham maksudnya.",
+      body: "“ready ga kak?”, “brp harganya?”, “bisa COD?”. Nala tetap paham maksudnya.",
     },
     {
       title: "Jawab dari Info Anda Sendiri",
-      body: "Cuma menjawab dari yang Anda kirim. Tidak pernah mengarang diskon.",
+      body: "Cuma menjawab dari info yang Anda berikan. Tidak pernah mengarang diskon.",
     },
     {
       title: "Tim Anda Pegang Kendali",
-      body: "Ambil alih chat sekali tap. Komplain dan refund selalu ke orang.",
+      body: "Ambil alih chat kapan saja. Komplain dan refund selalu ke orang.",
     },
   ],
 } as const;
 
-/**
- * The dashboard section. Nala runs inside WhatsApp, so the obvious question a
- * buyer has is where they actually see any of it — this answers that before the
- * features section starts making claims about reports.
- *
- * Point bodies are captions to the mockup above them, not paragraphs: one line
- * each, because they sit in a four-column row where a third line on one column
- * ragged against the others is the first thing the eye lands on.
- */
-export const dashboard = {
-  heading: "Pantau Semua Chat dan Hasilnya dalam Satu Dashboard",
-  subheading:
-    "Nala menjawab di dalam WhatsApp. Dashboard-nya tempat Anda melihat hasilnya, tanpa bergantung pada HP satu orang.",
-  points: [
-    {
-      title: "Semua Nomor, Satu Layar",
-      body: "Per cabang atau per brand, semuanya masuk ke dashboard yang sama.",
-    },
-    {
-      title: "Ambil Alih Kapan Saja",
-      body: "Tim Anda lanjut mengetik di chat yang sama, tanpa terasa ada pergantian.",
-    },
-    {
-      title: "Ubah Info Sekali Saja",
-      body: "Ganti harga atau tandai stok kosong. Chat berikutnya langsung ikut.",
-    },
-    {
-      title: "Tahu Kenapa Pembeli Batal",
-      body: "Pertanyaan tersering, yang belum terjawab, dan chat yang jadi orderan.",
-    },
-  ],
-} as const;
 
 /**
  * A side-by-side of how customer questions get handled today versus with Nala.
@@ -186,6 +153,40 @@ export const features = {
       title: "Lihat Pertanyaan Apa yang Paling Sering Masuk",
       body: "Semua chat tercatat dan dikelompokkan per topik, jadi Anda tahu pertanyaan mana yang paling sering masuk dan mana yang belum bisa dijawab Nala. Tambahkan informasi yang kurang sekali saja, chat berikutnya sudah terjawab sendiri.",
       capabilities: "Laporan pertanyaan teratas · Pelacakan orderan",
+    },
+  ],
+} as const;
+
+/**
+ * The dashboard closes the argument, so it is its own section rather than a
+ * sixth capability row. The five rows above each answer "can it do X"; this one
+ * answers "and where does all of that land" — which is a summary, not another
+ * item in a list, and reads wrong squeezed into a 420px thumbnail beside a
+ * paragraph.
+ *
+ * The four points are captions to the mockup and name only what is actually
+ * drawn in it: the tiles, the percentages, the catalog, the live queue.
+ */
+export const dashboard = {
+  heading: "Semuanya dalam Satu Dashboard",
+  subheading:
+    "Berapa pun nomor WhatsApp Business yang Anda pegang, semuanya masuk ke satu layar. Lihat berapa chat masuk, berapa yang selesai otomatis, dan mana yang perlu tindak lanjut.",
+  points: [
+    {
+      title: "Semua Nomor Satu Layar",
+      body: "Setiap nomor WhatsApp Business Anda masuk ke dashboard yang sama.",
+    },
+    {
+      title: "Hasilnya, Bukan Cuma Aktivitas",
+      body: "Berapa chat masuk, berapa persen selesai otomatis, dan berapa yang jadi orderan.",
+    },
+    {
+      title: "Ubah Info Sekali Saja",
+      body: "Ganti harga atau tandai stok kosong sekali, chat berikutnya langsung ikut.",
+    },
+    {
+      title: "Ambil Alih Kapan Saja",
+      body: "Antrean chat tampil realtime, dan tim bisa masuk ke percakapan mana pun.",
     },
   ],
 } as const;
@@ -428,7 +429,7 @@ export const footer = {
       title: "Produk",
       links: [
         { label: "Fitur", href: "#features" },
-        { label: "Dashboard", href: "#dashboard" },
+        { label: "Dashboard", href: "#features" },
         { label: "Harga", href: "#pricing" },
         { label: "FAQ", href: "#faq" },
       ],

@@ -110,9 +110,11 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+      {/* text-balance so a two-line heading splits evenly instead of dropping a
+          single orphaned word onto the second line. */}
       <h2
         className={cn(
-          "font-display text-h1 font-semibold text-ink-900",
+          "font-display text-h1 font-semibold text-balance text-ink-900",
           eyebrow ? "mt-5" : undefined,
         )}
       >
