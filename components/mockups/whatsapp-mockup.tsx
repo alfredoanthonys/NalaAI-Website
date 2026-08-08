@@ -505,7 +505,17 @@ export function WhatsappDesktopMockup({ className }: { className?: string }) {
               style={{ backgroundImage: "url(/whatsapp-bg.webp)", backgroundSize: "420px auto" }}
             />
 
-            <div className="relative flex h-full flex-col justify-end space-y-2 px-4 py-3.5">
+            {/* The gaps open up as the panel widens, and that is load-bearing
+                rather than taste. The thread is bottom-anchored in a panel of
+                stated height, so a wider panel wraps fewer lines, leaves the
+                stack shorter, and opens dead wallpaper above the first bubble —
+                60px of it by the time the frame is full. Widening the gaps
+                spends that slack on the thread instead: everything rides up,
+                the last message stays on the composer, and the earliest turns
+                clip off the top the way a real scrollback does. Tuned so the
+                stack stays a hair taller than the panel at every width; if the
+                messages or the panel height change, re-measure. */}
+            <div className="relative flex h-full flex-col justify-end space-y-2 px-4 py-3.5 @min-[896px]:space-y-2.5 @min-[1152px]:space-y-3 @min-[1450px]:space-y-4">
               {/* Scrollback. The thread is bottom-anchored, so without earlier
                   turns the taller panel opened a blank field above the first
                   message. These also do useful work: they show Nala answering a
