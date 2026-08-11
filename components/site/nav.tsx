@@ -10,25 +10,33 @@ import { nav } from "@/content/home";
 import { cn } from "@/lib/utils";
 
 /**
- * Sticky navigation. At the top of the page it runs edge to edge with no
- * chrome; once the page scrolls it contracts into a narrower floating card —
- * white surface, 1px `--color-border`, `--shadow-card`, `--radius-lg`.
+ * Sticky navigation, one appearance the whole way down: edge to edge, full
+ * height, no chrome. It used to contract into a narrower floating card once the
+ * page scrolled, which meant the logo and the bar resized under the reader
+ * while they were reading.
  *
- * That white card is what keeps the bar legible over every surface it passes:
- * the deep gradient hero, the closing gradient panel, and the light body
- * sections all sit far enough from white to read as separate.
+ * The background is opaque white rather than transparent, and that is the part
+ * that has to stay. The bar is only unobtrusive at the very top because the page
+ * behind it is white too; everything it passes over further down — the gradient
+ * hero panel, the mockups, the tinted sections — would otherwise scroll straight
+ * through the links.
+ *
+ * The closing hairline is `--color-line`, the same weight and colour as the grid
+ * rails, so the bar reads as the top edge of the same drafting grid rather than
+ * as a separate floating strip. It is the one thing here that answers to scroll:
+ * at rest the bar sits on the same white as the page and has no edge to justify,
+ * so the rule would just be a line drawn across the top of an empty page. It
+ * fades in as soon as there is content passing underneath for it to separate.
  */
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // Only the bar's own contracted/expanded state is driven by scroll. This
-    // deliberately does NOT close the mobile sheet: opening the sheet locks the
-    // body, which fires a scroll event on mobile browsers, so closing here made
-    // the menu shut the instant it was tapped anywhere below the top of the
-    // page. The sheet lives inside the sticky header and travels with it, so
-    // there is nothing to collapse in the first place.
+    // Only the hairline answers to this — the bar's height, width and logo are
+    // fixed. It deliberately does NOT close the mobile sheet: opening the sheet
+    // fires a scroll event on some mobile browsers, so closing here made the
+    // menu shut the instant it was tapped below the top of the page.
     const onScroll = () => setScrolled(window.scrollY > 4);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -43,31 +51,23 @@ export function Nav() {
   // fold. The sheet is anchored under a sticky bar and travels with it, so the
   // page scrolling behind it is harmless.
 
+  // The border is always drawn and only changes colour. Toggling `border-b`
+  // itself would add and remove a pixel of height under a sticky element, so the
+  // whole page would twitch up and down on the first scroll.
   return (
-    <header className="sticky top-0 z-50 px-4 sm:px-6">
-      <div
-        className={cn(
-          "mx-auto flex items-center justify-between gap-6 border transition-all duration-300 ease-out",
-          scrolled
-            // Solid white, not translucent: even at 95% the dashboard mockup
-            // and the hero gradient ghost through and the links stop being
-            // cleanly legible.
-            ? "mt-3 h-16 max-w-[880px] rounded-lg border-line bg-white px-4 shadow-card sm:px-5"
-            : "mt-0 h-[88px] max-w-frame rounded-lg border-transparent bg-transparent px-0 shadow-none",
-        )}
-      >
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b bg-surface-0 px-4 transition-colors duration-200 ease-out sm:px-6",
+        scrolled ? "border-line" : "border-transparent",
+      )}
+    >
+      <div className="mx-auto flex h-[88px] max-w-frame items-center justify-between gap-6">
         <a
           href="#top"
           className="flex shrink-0 items-center rounded-sm"
           aria-label="Nala AI, kembali ke atas"
         >
-          <NalaLogo
-            markClassName={cn("transition-all duration-300 ease-out", scrolled ? "size-7" : "size-8")}
-            wordmarkClassName={cn(
-              "transition-all duration-300 ease-out",
-              scrolled ? "h-[18px]" : "h-5",
-            )}
-          />
+          <NalaLogo markClassName="size-8" wordmarkClassName="h-5" />
         </a>
 
         {/* Links sit with the CTA on the right rather than centred. */}
@@ -84,7 +84,12 @@ export function Nav() {
             ))}
           </nav>
 
-          <Button variant="outlined" size="sm" className="ml-4" render={<a href={nav.cta.href} />}>
+          {/* Plain primary, not the `outlined` variant: that one draws a white
+              gap ring and a hairline edge outside the button, which read as a
+              stray outline around the CTA rather than as part of it.
+              `lg` to match the closing CTA band — the two are the same action,
+              so they are the same button. */}
+          <Button size="lg" className="ml-4" render={<a href={nav.cta.href} />}>
             <WhatsappIcon />
             {nav.cta.label}
           </Button>
